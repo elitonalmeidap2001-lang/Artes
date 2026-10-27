@@ -1,0 +1,7 @@
+.vs/
+bin/
+obj/
+release/
+*.pdb
+*.user
+.DS_Store
