@@ -5,7 +5,7 @@ Ferramenta para transformar uma imagem em um painel dividido em folhas para impr
 ## Abrir ou baixar
 
 - **Usar no navegador:** [Painel em Folhas](https://painel-em-folhas.tontoon.chatgpt.site)
-- **Baixar o aplicativo portátil para Windows:** [baixar o .exe](https://painel-em-folhas.tontoon.chatgpt.site/baixar-windows.html)
+- **Baixar o aplicativo portátil para Windows:** [PainelEmFolhas.exe](https://github.com/elitonalmeidap2001-lang/Artes/releases/download/v1.0.0/PainelEmFolhas.exe)
 
 O aplicativo Windows usa Microsoft Edge WebView2 Runtime. Ele contém o HTML e a biblioteca de PDF, mas as fontes personalizadas podem depender de conexão; fontes do sistema são usadas como alternativa.
 
@@ -56,4 +56,3 @@ Imprima em **100% / tamanho real**, sem “ajustar à página”, e meça a rég
 Leia [Como funciona](docs/COMO-FUNCIONA.md) antes de alterar o cálculo das folhas ou a geração do PDF. Para mudanças de interface, preserve os IDs usados pelo JavaScript. Compare a prévia e um PDF real em ao menos uma tela pequena e uma tela desktop.
 
 O projeto usa jsPDF 2.5.1, distribuído sob licença MIT. O arquivo incluído mantém o aviso de licença original. Este repositório ainda não define uma licença própria para o restante do código.
-
