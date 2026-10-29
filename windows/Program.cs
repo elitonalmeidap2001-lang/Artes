@@ -39,6 +39,7 @@ internal sealed class MainWindow : Form
             Directory.CreateDirectory(appFolder);
             Extract("index.html", Path.Combine(appFolder, "index.html"));
             Extract("jspdf.umd.min.js", Path.Combine(appFolder, "jspdf.umd.min.js"));
+            Extract("opentype.min.js", Path.Combine(appFolder, "opentype.min.js"));
 
             var userDataFolder = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),

@@ -16,9 +16,19 @@ O canvas mostra a grade e o enquadramento antes de gerar o PDF. A imagem pode se
 
 O botão de tema troca fundo claro e escuro. A preferência é salva no navegador. A imagem de exemplo é gerada em canvas e aparece ao abrir a ferramenta.
 
+## Textos e logos
+
+O passo 4 abre um editor sobre a mesma prévia. Os elementos ficam em `layers`, uma lista na ordem de empilhamento (o último fica por cima). As posições e os tamanhos são guardados como **fração do painel** (`x` e `y` de 0 a 1; `fs` e `w` em relação à largura), então a composição acompanha o painel quando o diâmetro muda. Os elementos não são salvos no `localStorage`.
+
+Os textos não usam a rasterização do navegador. O opentype.js lê a fonte e entrega os contornos dos glifos, que viram um caminho em unidades da fonte, centralizado em (0, 0). A prévia desenha esse caminho no canvas e o PDF recebe os mesmos pontos como operadores vetoriais (`m`, `l`, `c`), com o contorno branco, a borda preta e o preenchimento desenhados nessa ordem. Por isso a prévia e o PDF coincidem e a nitidez não depende do tamanho do painel.
+
+`buildItems(g)` converte `layers` em itens já em milímetros e `PF.makePdf(..., items)` os desenha dentro do mesmo recorte da arte, na folha-guia e em cada folha que o item toca. Folhas que o item não alcança não recebem esse desenho. Logos PNG entram por `addImage` com canal alfa (máscara).
+
+Detalhes, limites e como incluir novas fontes estão em [Editor de textos e logos](EDITOR-DE-TEXTOS.md).
+
 ## Salvamento
 
-No site, o PDF é criado com jsPDF e baixado pelo navegador. No aplicativo Windows, a mesma lógica de download funciona dentro do WebView2. A versão Windows inclui uma cópia local do jsPDF; a web carrega essa biblioteca por CDN.
+No site, o PDF é criado com jsPDF e baixado pelo navegador. No aplicativo Windows, a mesma lógica de download funciona dentro do WebView2. A versão Windows inclui cópias locais do jsPDF e do opentype.js; a web carrega essas bibliotecas por CDN.
 
 ## Limites conhecidos
 
@@ -26,4 +36,6 @@ No site, o PDF é criado com jsPDF e baixado pelo navegador. No aplicativo Windo
 - Digitar margem zero no PDF não transforma uma impressora comum em impressora sem bordas.
 - O indicador de DPI usa os pixels da imagem já processada e é uma estimativa.
 - Um PDF com muitas folhas ou uma imagem grande pode consumir bastante memória no navegador.
+- Fontes anexadas pelo usuário precisam ser TTF, OTF ou WOFF. WOFF2 não é lido pelo opentype.js.
+- Textos e logos não têm rotação e não são salvos ao fechar a página.
 - Mudanças na geometria devem ser verificadas com medidas no PDF e com uma montagem impressa; a prévia sozinha não confirma escala física.
